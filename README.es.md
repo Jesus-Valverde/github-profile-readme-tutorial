@@ -66,7 +66,18 @@ Una alternativa compacta a las filas de badges es skill-icons: una sola URL que 
 
 Los ids son slugs en minúsculas (`js`, `py`, `react`, `nextjs`, `kubernetes`...), el tema default es `dark` y `perline` controla cuántos íconos por línea (1 a 50). El tradeoff: sin texto al lado, un muro de logos es menos legible para quien no reconoce los íconos. Para un perfil de portafolio, los badges con nombre explícito comunican mejor; los íconos compactos ganan cuando la lista es larga.
 
-Detalle de 2026: el proyecto original (tandpfun) sigue vivo pero lento, con más de mil issues en fila. Existe una alternativa comunitaria más activa, `skills.syvixor.com`, con más de 1,059 íconos y una ventaja real: adapta el tema claro/oscuro automáticamente según la preferencia del visitante.
+Detalle de 2026: el proyecto original (tandpfun) sigue vivo pero lento, con más de mil issues en fila. Existe una alternativa comunitaria más activa, `skills.syvixor.com`, con más de 1,059 íconos y una ventaja real: adapta el tema claro/oscuro automáticamente según la preferencia del visitante. Ese fallback me salió necesario el mismo día que publiqué este tutorial: skillicons.dev no tiene íconos de React Router ni JWT (devuelve cuadros vacíos, con HTTP 200 de engaño), y syvixor tiene ambos con los slugs `reactrouter` y `jwt`.
+
+## Un README, dos idiomas
+
+Si quieres ofrecer tu perfil en más de un idioma, el patrón canónico (del repo multilanguage-readme-pattern de jonatasemidio) cabe en una línea: una fila de badges de idioma arriba del README, cada uno con enlace a su variante.
+
+```markdown
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](README.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md)
+```
+
+La convención de archivos es el sufijo de idioma en la raíz: `README.md` como principal y `README.es.md` para español. Cada versión lleva la misma fila de badges, así que el lector salta entre idiomas desde cualquiera. La limitación honesta: GitHub solo renderiza `README.md` en tu página de perfil (no ejecuta JavaScript, así que no hay cambio de idioma "en el sitio"). El selector del perfil lleva al repo, donde sí se lee la versión completa en el otro idioma.
 
 ## Lo que GitHub ya te regala
 
@@ -132,6 +143,8 @@ Y la de trofeos, de ryo-ma:
 ```
 
 Parámetros útiles de la tarjeta de stats: `include_all_commits=true` cuenta commits de toda la vida (sin él, solo del año), `hide_border=true` la integra mejor al fondo, y `cache_seconds` controla cuánto se cachea la imagen (el mínimo actual es 21,600 segundos, o sea 6 horas, y el máximo 86,400, es decir 24 horas; si un tutorial te dice que el mínimo son 4 horas, está desactualizado).
+
+Si pones dos tarjetas lado a lado (con `width` en porcentajes, que se apilan solas en móvil), anclalas con `align="top"`: GitHub alinea las imágenes por la línea de texto, y como las tarjetas tienen proporciones naturales distintas, la más corta queda flotando abajo. Y si quieres que además midan exactamente lo mismo, compensa la proporción con el reparto del ancho. Lo verifiqué con mi propio perfil: la tarjeta de stats mide 467×195 píxeles y la de racha 495×195; con `width="48%"` y `width="51%"` las alturas renderizadas empatan al píxel, y al ser porcentajes siguen empatadas a cualquier tamaño de ventana.
 
 Ahora el problema que ningún tutorial silencioso te cuenta: las instancias hospedadas comparten la cuota anónima de la API de GitHub, y eso las hace intermitentes. La discusión oficial del proyecto (septiembre de 2025) terminó con una recomendación clara del propio equipo: despliega tu propia instancia en Vercel con tu token. El proceso toma unos 15 minutos: haces fork del repo, lo conectas a Vercel, y en las variables de entorno de Vercel agregas `PAT_1` con un Personal Access Token (PAT, la llave de acceso personal que GitHub usa para autorizar programas) clásico sin ningún scope marcado. Después cambias la URL de la tarjeta de `github-readme-stats.vercel.app` a la de tu instancia. La de racha tiene el mismo patrón de self-hosting documentado; la de trofeos sigue arriba tal cual, estable pero sin desarrollo desde hace tiempo.
 
@@ -212,6 +225,22 @@ Bonus de privacidad que sale gratis de este diseño: como quien hace la petició
 Tres reglas de seguridad que no se negocian. Primera: cada herramienta recibe el token mínimo. La instancia self-hosted de stats usa un PAT clásico sin scopes (en variables de entorno de Vercel, no en secrets del repo); las Actions que commitean a tu repo (serpiente, summary cards, 3D) usan un token fine-grained limitado a ese repo con permiso de lectura y escritura de contenidos, guardado como repository secret; metrics usa un PAT sin scopes para datos públicos. Segunda: un token jamás va en el README, en el YAML del workflow ni en un mensaje de commit. La protección de secretos de GitHub detecta los patrones `ghp_` y `github_pat_` al hacer push, pero no confíes solo en eso. Tercera: si un token se filtra, revócalo de inmediato en Settings → Developer settings; borrar el commit no revoca nada.
 
 Y la parte que casi nadie revisa antes de publicar: qué dice de ti tu README a personas que no son tu público. El `mailto:` con tu correo a la vista garantiza spam (la ofuscación con JavaScript o imágenes no funciona; los harvesters la superan). Una tarjeta de Steam pública expone tu biblioteca, tus horas de juego y tu lista de amigos. Los contadores de vistas registran telemetría de tu perfil. Ninguno de estos es incorrecto por definición; todos deben ser decisiones conscientes. En mi caso: conservo el botón de Gmail y la tarjeta de Steam porque son parte de mi identidad de perfil, pero el tutorial que estás leyendo también existe para documentar que sé exactamente qué estoy exponiendo.
+
+## Contador de visitas y botón de sponsor
+
+Dos badges cortos que suelen pedirse a gritos. El contador de visitas más usado es el de komarev, y va bien arriba del saludo:
+
+```markdown
+![Profile Views](https://komarev.com/ghpvc/?username=Jesus-Valverde&color=blueviolet&style=for-the-badge&label=PROFILE+VIEWS)
+```
+
+Con los avisos que ya conoces del ecosistema: el número es aproximado (la caché de camo filtra parte del tráfico) y su propio mantenedor lo describe como un "tracking pixel". Evita el viejo `visitor-badge.laobi.icu` que todavía circula en colecciones de tarjetas: es el servicio frágil de la categoría. Y el botón de sponsor es un badge-enlace a `github.com/sponsors/TU-USUARIO`, con su logo oficial:
+
+```markdown
+[![Sponsor Me](https://img.shields.io/badge/Sponsor_Me-blueviolet?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Jesus-Valverde)
+```
+
+El detalle que se olvida: el enlace solo funciona si tienes GitHub Sponsors activado, y eso se hace aparte, en github.com/sponsors (disponible en México; te pide una cuenta de Stripe o PayPal para cobrar). Puedes verificar si lo tienes activo consultando `sponsorsListing` en la API GraphQL de tu usuario. Si prefieres saltarte ese alta, Buy Me a Coffee es la alternativa sin papeleo, y su badge se pega igual.
 
 ## Generadores: el atajo y su letra chica
 
