@@ -142,6 +142,14 @@ Y la de trofeos, de ryo-ma:
 ![Trophy](https://github-profile-trophy.vercel.app/?username=Jesus-Valverde)
 ```
 
+De la misma familia que las de stats hay una cuarta que se suele olvidar y es la única verdaderamente automática de todas: la de lenguajes más usados, que GitHub calcula de tus repos reales (la fila de badges de tecnologías cuenta lo que tú dices que sabes; esta cuenta lo que tu código dice que haces):
+
+```markdown
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jesus-Valverde&layout=compact&theme=tokyonight&langs_count=8)
+```
+
+`layout=compact` la vuelve lista compacta en vez de barra de porcentajes, y `langs_count` controla cuántos lenguajes muestra.
+
 Parámetros útiles de la tarjeta de stats: `include_all_commits=true` cuenta commits de toda la vida (sin él, solo del año), `hide_border=true` la integra mejor al fondo, y `cache_seconds` controla cuánto se cachea la imagen (el mínimo actual es 21,600 segundos, o sea 6 horas, y el máximo 86,400, es decir 24 horas; si un tutorial te dice que el mínimo son 4 horas, está desactualizado).
 
 Si pones dos tarjetas lado a lado (con `width` en porcentajes, que se apilan solas en móvil), anclalas con `align="top"`: GitHub alinea las imágenes por la línea de texto, y como las tarjetas tienen proporciones naturales distintas, la más corta queda flotando abajo. Y si quieres que además midan exactamente lo mismo, compensa la proporción con el reparto del ancho. Lo verifiqué con mi propio perfil: la tarjeta de stats mide 467×195 píxeles y la de racha 495×195; con `width="48%"` y `width="51%"` las alturas renderizadas empatan al píxel, y al ser porcentajes siguen empatadas a cualquier tamaño de ventana.
@@ -246,7 +254,7 @@ El detalle que se olvida: el enlace solo funciona si tienes GitHub Sponsors acti
 
 Si quieres saltarte el armado manual, el generador más citado es GPRM (gprm.itsvg.in): marcas casillas de secciones (redes, stack de más de 300 tecnologías, tarjetas, trofeos, contador), eliges tema, y te entrega el Markdown completo con preview en vivo. Dato curioso que corregimos durante la investigación de este tutorial: la misatribución más repetida de la blogosfera es darle el crédito a JayantGoel001; el autor real es Vishwa Gaurav, verificable en el repo y sus contribuidores. JayantGoel001 mantiene colecciones de plantillas famosas, de ahí la confusión.
 
-La galería canónica de inspiración es `awesome-github-profile-readme`, una lista curada con más de 31,000 estrellas, activa a septiembre de 2026. Entra, elige un perfil que te guste y copia su Markdown crudo.
+La galería canónica de inspiración es `awesome-github-profile-readme`, una lista curada con más de 31,000 estrellas, activa a septiembre de 2026. Entra, elige un perfil que te guste y copia su Markdown crudo. Como catálogo de tarjetas organizadas por categoría (stats, contadores, sponsors), existe también Profile-Readme-Cards: sirve para ver el menú completo de un vistazo, pero verifica la frescura de cada recomendación — su contador sugerido (`visitor-badge.laobi.icu`) es justo el servicio frágil de su categoría. Y como techo saludable, su propia guía lo dice: una o dos tarjetas, máximo tres.
 
 El precio del atajo: producen perfiles clon. Cuando miles de personas marcan las mismas casillas, los perfiles se parecen entre sí, y los hilos de feedback lo señalan seguido. Un generador es un buen punto de partida; el valor está en lo que le agregas después. Y sobre los generadores con IA que proliferaron en 2025-2026: existen, pero casi toda la evidencia de su calidad viene del marketing de quienes los venden.
 

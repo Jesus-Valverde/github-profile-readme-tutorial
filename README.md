@@ -142,6 +142,14 @@ And the trophy card, by ryo-ma:
 ![Trophy](https://github-profile-trophy.vercel.app/?username=Jesus-Valverde)
 ```
 
+In the same family as the stats cards there is a fourth one people often forget, and it is the only truly automatic one of them all: the most-used languages card, which GitHub computes from your actual repos (the technology badge row says what you claim to know; this one counts what your code says you do):
+
+```markdown
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jesus-Valverde&layout=compact&theme=tokyonight&langs_count=8)
+```
+
+`layout=compact` turns it into a compact list instead of a percentage bar, and `langs_count` controls how many languages it shows.
+
 Useful parameters on the stats card: `include_all_commits=true` counts lifetime commits (without it, the current year only), `hide_border=true` blends it into the background, and `cache_seconds` controls how long the image is cached (the current minimum is 21,600 seconds, or 6 hours, and the maximum is 86,400, that is, 24 hours; if a tutorial says the minimum is 4 hours, it is outdated).
 
 If you place two cards side by side (with percentage `width`, so they stack on mobile), anchor them with `align="top"`: GitHub aligns images by the text baseline, and since the cards have different natural proportions, the shorter one floats downward. And if you also want them to measure exactly the same, compensate the aspect ratio with the width split. I verified it on my own profile: the stats card measures 467×195 pixels and the streak card 495×195; with `width="48%"` and `width="51%"` the rendered heights match to the pixel, and being percentages they stay matched at any window size.
@@ -246,7 +254,7 @@ The overlooked detail: the link only works if you have GitHub Sponsors enabled, 
 
 If you want to skip the manual assembly, the most-cited generator is GPRM (gprm.itsvg.in): tick boxes for sections (socials, a 300+ technology stack picker, cards, trophies, visitor counter), pick a theme, and it hands you the complete Markdown with a live preview. A fun fact we corrected during this tutorial's research: the blogosphere's most repeated misattribution gives the credit to JayantGoel001; the actual author is Vishwa Gaurav, verifiable in the repo and its contributors. JayantGoel001 maintains famous template collections, hence the confusion.
 
-The canonical inspiration gallery is `awesome-github-profile-readme`, a curated list with over 31,000 stars, active as of September 2026. Go in, pick a profile you like, and copy its raw Markdown.
+The canonical inspiration gallery is `awesome-github-profile-readme`, a curated list with over 31,000 stars, active as of September 2026. Go in, pick a profile you like, and copy its raw Markdown. As a card catalog organized by category (stats, counters, sponsors), there is also Profile-Readme-Cards: useful to see the full menu at a glance, but verify the freshness of each recommendation — its suggested counter (`visitor-badge.laobi.icu`) is precisely the fragile service in its category. And as a healthy ceiling, its own guide says it: one or two cards, three at most.
 
 The shortcut's price: generators produce clone profiles. When thousands of people tick the same boxes, profiles start resembling each other, and feedback threads point it out often. A generator is a good starting point; the value is in what you add afterwards. As for the AI generators that proliferated in 2025-2026: they exist, but nearly all the evidence of their quality comes from the marketing of the people selling them.
 
