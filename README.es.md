@@ -1,3 +1,5 @@
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](README.md) [![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md)
+
 # Tutorial — Personaliza tu README de perfil de GitHub (caso real: el mío)
 
 
