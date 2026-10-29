@@ -10,46 +10,32 @@ This tutorial walks you through building your GitHub profile README: the special
 GitHub shows a README on your profile when you meet three conditions:
 
 1. The repository is **public**.
-2. The repo name is exactly your username (in my case, `Jesus-Valverde`).
+2. The repo name is exactly your username (`Jesus-Valverde`, in my case).
 3. The repo has a `README.md` file with content, at its root.
 
-If any of the three is missing, your profile stays blank. There is nothing else to configure.
+If any of the three is missing, your profile stays blank. To create it: click `+` → **New repository**, name it exactly like your username, set it to **Public**, tick **Add a README**, and create. GitHub detects the special repo and shows an **Edit README** button right on your profile.
 
-To create it: on github.com, click `+` → **New repository**. Name it exactly like your username, set it to **Public**, tick **Add a README**, and create the repo. When you open it, GitHub detects that it is your special repo and shows an **Edit README** button right on your profile.
-
-Three special cases:
-
-- If your account is managed by a company through GitHub Enterprise Managed Users, you cannot have a personalized profile; the official documentation excludes it.
-- If you created a repo with your name before July 2020, it does not show up automatically: open the repo and press **Share to profile**.
-- Achievements still exist as of October 2026, but the documentation has dead pages and two badges can no longer be earned. Treat them as decoration, not as a goal.
+Three special cases: company-managed accounts (Enterprise Managed Users) cannot have a personalized profile; repos named after you created before July 2020 do not show up automatically (press **Share to profile** inside the repo); and achievements still exist as of October 2026 but with dead documentation pages and two retired badges — treat them as decoration, not as a goal.
 
 ## My profile as the example
 
-This tutorial was born from a real pending item: my profile had a section saying "👉 Tutorials", with a "loading..." GIF and the admission that it was unfinished. What follows is the anatomy of what I already built: what it does well, what it was missing, and what is fragile.
+This tutorial was born from a real pending item: my profile had a section saying "👉 Tutorials", with a "loading..." GIF and the admission that it was unfinished. I filled it by writing exactly this document, and its anatomy serves as the case study.
 
-My `README.md` weighs 3,369 bytes and has this structure: a greeting, the Tutorials section (the placeholder), a "who am I" section with the Mexican flag, another on my studies, a row of 11 technology badges, 3 buttons to practice platforms (freeCodeCamp, Exercism, HackerRank), 3 contact buttons (LinkedIn, Linktree, email), and a card from my Steam profile. That is 17 badges in total, all served by shields.io with the `for-the-badge` style.
+My `README.md` weighs 3,369 bytes: a greeting, the Tutorials section (the placeholder), a "who am I" with the Mexican flag, my studies, a row of 11 technology badges, 3 practice buttons (freeCodeCamp, Exercism, HackerRank), 3 contact buttons (LinkedIn, Linktree, email), and a Steam card. That is 17 badges in total, all served by shields.io with the `for-the-badge` style. Two things it gets right without having planned it: `alt` on every image and proper `##` headings — exactly what GitHub's accessibility guidance recommends for profiles.
 
-Each badge looks like this (a real one, copied from my file):
+What it was missing: stats cards, a contribution streak, and the snake — what the rest of the tutorial builds. And two fragilities worth pointing out because you can fall into them too: my Steam card is served by a community service (`card.yuy1n.io`) with no backing (if that service shuts down, the largest block of my profile breaks), and the email button exposes my Gmail to spam harvesters. The locks come further down.
+
+## Badges with shields.io
+
+A badge is an image that shields.io generates from its own URL. The basic format is `img.shields.io/badge/LABEL-MESSAGE-COLOR`, and most of the control lives in the URL parameters: `style` picks the style (`flat` by default; also `flat-square`, `plastic`, `for-the-badge`, `social`), `logo` takes any icon from the simple-icons catalog, and colors accept hex.
+
+Three escaping rules cause 90% of broken badges: a literal hyphen is written `--`, a literal underscore is `__`, and the `#` of hex colors is encoded as `%23` (a bare hex also works). A real one, copied from my file:
 
 ```markdown
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ```
 
-Two things my profile gets right without having planned it: every image has alternative text (`alt`) and the sections use proper `##` headings. That makes it readable for screen readers, which is exactly what GitHub's accessibility guidance recommends for profiles.
-
-What it was missing: stats cards, a contribution streak, and the snake. And two fragilities worth pointing out because you can fall into them too: my Steam card is served by a community service (`card.yuy1n.io`) with no backing — if that service shuts down, the largest block of my profile breaks. And the email button uses a `mailto:` link with my Gmail in plain sight, which spam harvesters read with pleasure. The locks come further down.
-
-## Badges with shields.io
-
-A badge is an image that shields.io generates from its own URL. The basic format is `img.shields.io/badge/LABEL-MESSAGE-COLOR`, and most of the control lives in the URL parameters: `style` picks the style (`flat` is the default; also `flat-square`, `plastic`, `for-the-badge`, and `social`), `logo` takes the name of any icon in the simple-icons catalog, and `logoColor` and the badge color accept hex colors.
-
-Three escaping rules cause 90% of broken badges:
-
-- The hyphen `-` separates segments, so a literal hyphen is written `--`.
-- A literal underscore is written `__`.
-- The `#` of hex colors is encoded as `%23` (a bare hex without `#` also works).
-
-To make a badge clickable, do not use the `link=` parameter (it does not work inside `<img>`): wrap the Markdown image in a normal link:
+To make it clickable, do not use the `link=` parameter (it does not work inside `<img>`): wrap the Markdown image in a normal link.
 
 ```markdown
 [![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/your-username/)
@@ -59,32 +45,28 @@ On limits: shields.io publishes no quota figures; real bottlenecks usually sit i
 
 ## Icons without text with skill-icons
 
-A compact alternative to badge rows is skill-icons: a single URL that draws a grid of rounded icons.
+A compact alternative to badge rows: a single URL that draws the whole grid.
 
 ```markdown
 [![My Skills](https://skillicons.dev/icons?i=js,html,css,react,py,flask&theme=dark)](https://skillicons.dev)
 ```
 
-Ids are lowercase names (`js`, `py`, `react`, `nextjs`, `kubernetes`...), the default theme is `dark`, and `perline` controls how many icons go per line (1 to 50). The downside: with no text next to them, a wall of logos is less legible to whoever does not recognize the icons. For a portfolio, named badges communicate better; compact icons win when the list is long.
-
-If an icon you need is missing: skillicons.dev does not have them all (React Router and JWT return empty squares). The alternative `skills.syvixor.com` has over 1,059 icons — including `reactrouter` and `jwt` — and switches between light and dark theme based on the visitor's preference.
+Ids are lowercase names, the default theme is `dark`, and `perline` controls how many icons go per line (1 to 50). The downside: with no text next to them, a wall of logos communicates less — named badges win on portfolios, compact icons win on long lists. And if an icon you need is missing: skillicons.dev does not have them all (React Router and JWT return empty squares), but `skills.syvixor.com` has over 1,059 — including `reactrouter` and `jwt` — and switches between light and dark theme with the visitor's preference. That is what I use today: my 11 badges fit in one line.
 
 ## A README in two languages
 
-To offer your profile in more than one language, put a row of language badges at the top of the README, each linking to its version:
+Put a row of language badges at the top of the README, each linking to its version:
 
 ```markdown
 [![en](https://img.shields.io/badge/lang-en-blue.svg)](README.md)
 [![es](https://img.shields.io/badge/lang-es-yellow.svg)](README.es.md)
 ```
 
-The file convention is a language suffix: `README.md` as the primary and `README.es.md` for Spanish. Every version carries the same badge row, so readers can hop between languages from any of them. Keep in mind that GitHub only renders `README.md` on your profile page (it does not run JavaScript, so there is no "on-site" language switcher): the badge leads to the repo, where the full other-language version does render.
+The file convention is a language suffix: `README.md` as the primary and `README.es.md` for Spanish, both carrying the same badge row. Mind this: GitHub only renders `README.md` on your profile page (it does not run JavaScript, so there is no "on-site" language switcher) — the badge leads to the repo, where the full other-language version does render.
 
 ## GitHub's native formatting
 
 Before installing anything, use what GitHub already supports: collapsible sections, callouts, footnotes, and a tag for images that follow the visitor's light/dark theme. No external services, no tokens, no maintenance.
-
-Collapsible section (useful so you do not flatten your visitor with text):
 
 ```html
 <details>
@@ -96,9 +78,9 @@ for the inner Markdown to render.
 </details>
 ```
 
-The callouts (`[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`) are written inside a blockquote. The official documentation asks for moderation: at most one or two per document, only for crucial information. Note: they render on github.com only; on other viewers they degrade to a plain blockquote.
+The callouts (`[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]`) are written inside a blockquote. The official documentation asks for moderation: at most one or two per document, only for crucial information — and they render on github.com only; on other viewers they degrade to a plain blockquote.
 
-And the most underrated native feature: the image that changes with the visitor's theme.
+The most underrated native feature: the image that changes with the visitor's theme.
 
 ```html
 <picture>
@@ -109,7 +91,7 @@ And the most underrated native feature: the image that changes with the visitor'
 
 ## Banners and animated effects (in moderation)
 
-If you want a header with presence, the two standard tools are capsule-render (animated SVG banners) and readme-typing-svg (text that types and deletes itself).
+For a header with presence: capsule-render (animated SVG banners) and readme-typing-svg (text that types and deletes itself).
 
 ```markdown
 ![header](https://capsule-render.vercel.app/api?type=wave&color=gradient&height=200&section=header&text=Your%20Name&fontSize=42&animation=fadeIn)
@@ -117,29 +99,17 @@ If you want a header with presence, the two standard tools are capsule-render (a
 ![typing](https://readme-typing-svg.demolab.com/?font=Fira+Code&size=22&pause=1000&multiline=true&width=600&height=80&lines=Web+developer;Learning+Flask+and+React)
 ```
 
-The `multiline=true` parameter stacks several phrases separated by semicolons, instead of retyping everything on one line.
-
-Before filling your profile with effects, consider the cost: each effect is one more external dependency, decorative GIFs weigh megabytes, none respects the system's reduced-motion preference, and an animated banner + animated text + GIF + badges together give you the saturated profile the community points to as a bad example. My rule, drawn from my own profile: the "loading..." GIF works because there is exactly one and it tells a story. Two more would be noise.
+`multiline=true` stacks several phrases separated by semicolons. Before filling your profile with effects, consider the cost: each effect is one more external dependency, decorative GIFs weigh megabytes, none respects the system's reduced-motion preference, and an animated banner + animated text + GIF + badges together give you the saturated profile the community points to as a bad example. My rule, drawn from my own profile: the "loading..." GIF worked because there was exactly one and it told a story; two more would be noise.
 
 ## Stats cards
 
-Here lives the heart of the ecosystem: community services that turn your GitHub activity into image cards.
-
-The statistics card, by anuraghazra (github-readme-stats):
+Community services that turn your GitHub activity into image cards:
 
 ```markdown
 ![My GitHub stats](https://github-readme-stats.vercel.app/api?username=Jesus-Valverde&show_icons=true&theme=tokyonight)
-```
 
-The contribution streak card, by DenverCoder1:
-
-```markdown
 ![GitHub Streak](https://streak-stats.demolab.com?user=Jesus-Valverde&theme=tokyonight)
-```
 
-The trophy card, by ryo-ma:
-
-```markdown
 ![Trophy](https://github-profile-trophy.vercel.app/?username=Jesus-Valverde)
 ```
 
@@ -149,15 +119,13 @@ And a fourth one people often forget, the only truly automatic one: the most-use
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Jesus-Valverde&layout=compact&theme=tokyonight&langs_count=8)
 ```
 
-Useful parameters on the stats card: `include_all_commits=true` counts lifetime commits (without it, the current year only), `hide_border=true` blends it into the background, `layout=compact` turns the languages card into a compact list instead of bars, `langs_count` controls how many languages it shows, and `cache_seconds` controls how long the image is cached (6 hours minimum, 24 maximum).
+Useful parameters: `include_all_commits=true` counts lifetime commits (without it, the current year only), `hide_border=true` blends the card into the background, `layout=compact` turns the languages card into a compact list, `langs_count` controls how many languages it shows, and `cache_seconds` controls how long the image is cached (6 hours minimum, 24 maximum). If you place two cards side by side (with percentage `width`, so they stack on mobile), anchor them with `align="top"`: GitHub aligns images by their text line and the shorter one floats downward. And to make them measure the same, compensate with the width split: my stats card measures 467×195 pixels and the streak card 495×195; with `width="48%"` and `width="51%"` they stay matched at any window size.
 
-If you place two cards side by side (with percentage `width`, so they stack on mobile), anchor them with `align="top"`: GitHub aligns images by their text line, and since the cards have different natural heights, the shorter one floats downward. If you also want them to measure the same, compensate with the width split: my stats card measures 467×195 pixels and the streak card 495×195; with `width="48%"` and `width="51%"` they stay matched at any window size.
-
-The problem to know about before installing anything: hosted instances share GitHub's anonymous API quota and therefore fail intermittently. The fix recommended by the project's own team is deploying your instance on Vercel, and it takes about 15 minutes: fork the repo, connect it to Vercel, and in Vercel's environment variables add `PAT_1` with a classic Personal Access Token (PAT: the key GitHub uses to authorize programs) with no permissions checked. Then change the card URL from `github-readme-stats.vercel.app` to your instance's. The streak card documents the same process; the trophy service is still up as is.
+The problem to know about before installing anything: hosted instances share GitHub's anonymous API quota and therefore fail intermittently. The fix recommended by the project's own team is deploying your instance on Vercel (~15 minutes): fork the repo, connect it to Vercel, and in Vercel's environment variables add `PAT_1` with a classic Personal Access Token (the key GitHub uses to authorize programs) with no permissions checked. Then change the card URL to your instance's. The streak card documents the same process; the trophy service is still up as is.
 
 ## Other widgets
 
-A second circle of popular widgets exists. What decides their robustness is who serves the image when someone visits your profile:
+A second circle of popular widgets. What decides their robustness is who serves the image:
 
 | Widget | Who serves the image? | If the third party fails |
 |---|---|---|
@@ -167,15 +135,11 @@ A second circle of popular widgets exists. What decides their robustness is who 
 | 3D contributions (yoshi389111) | An Action saves the SVG to your repo | Nothing: same pattern |
 | WakaTime (coding time) | Their API + a daily Action | Empty section or error |
 
-The most robust pattern in the ecosystem is "committed": the Action runs in your repo, generates the SVG, and saves it as part of your repository. The image the visitor loads lives on `raw.githubusercontent.com` — on GitHub, not on somebody else's server that can fail at 3 a.m.
-
-Two warnings from this circle: the views counter is approximate (GitHub's cache filters part of the traffic; its own maintainer describes it as a "tracking pixel", and it has stopped displaying under load), and WakaTime requires enabling "Display activity publicly" on your WakaTime account and updates once a day.
+The most robust pattern is "committed": the image lives on `raw.githubusercontent.com` — on GitHub, not on somebody else's server that can fail at 3 a.m. Two warnings: the views counter is approximate (its own maintainer describes it as a "tracking pixel", and it has stopped displaying under load), and WakaTime requires enabling "Display activity publicly" and updates once a day.
 
 ## The snake with GitHub Actions
 
-The ecosystem's most beloved animation is the snake eating your contribution grid (Platane/snk). Here the image is generated inside your own repo and saved to a branch named `output` — after that, it depends on nobody.
-
-Create the file `.github/workflows/snake.yml`:
+The snake eating your contribution grid (Platane/snk) is generated inside your own repo and saved to a branch named `output` — after that, it depends on nobody. Create the file `.github/workflows/snake.yml`:
 
 ```yaml
 name: Generate Snake
@@ -203,28 +167,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-And embed it pointing at the raw `output` branch:
+And embed it from the raw `output` branch (with the `<picture>` trick for a dark version):
 
 ```markdown
-![Snake animation](https://raw.githubusercontent.com/Jesus-Valverde/Jesus-Valverde/output/github-contribution-grid-snake.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-USERNAME/output/github-contribution-grid-snake-dark.svg">
+  <img alt="Snake animation" src="https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-USERNAME/output/github-contribution-grid-snake.svg">
+</picture>
 ```
 
-On public repos workflows are free, and a daily snake run takes about a minute. The mistake that breaks more profiles than you would imagine: **if your repo goes 60 days without activity, GitHub disables scheduled workflows automatically.** There is no warning on the README — your snake simply stays frozen on the last SVG, and it looks like the service's fault when the workflow is just paused. The fix: Actions tab → select the workflow → Enable workflow, and make a commit to reset the clock.
-
-One more maintenance note: use recent versions of actions. Their runtime migrates every year (from Node 20 to Node 24 as of June 2026), and old actions stopped running.
+On public repos workflows are free, and a daily snake run takes about a minute. The mistake that breaks more profiles than you would imagine: **if your repo goes 60 days without activity, GitHub disables scheduled workflows automatically.** There is no warning — your snake simply stays frozen on the last SVG, and it looks like the service's fault when the workflow is just paused. The fix: Actions tab → Enable workflow → make a commit to reset the clock. Use recent versions of actions: the runtime moved to Node 24 as of June 2026, and old actions stopped running.
 
 Two more automations if you need them: lowlighter/metrics generates infographics with 30+ plugins (its shared instance is chronically rate-limited; the stable path is running it as an Action in your repo), and gautamkrishnar/blog-post-workflow inserts your recent posts between two comment tags, via RSS.
 
 ## Why your card shows stale data
 
-You updated your stats and the card still shows yesterday's data. Almost always it is caching, and there are two layers:
+You updated your stats and the card still shows yesterday's data. Almost always it is two stacked caches:
 
 1. **The widget's cache:** github-readme-stats' `cache_seconds` keeps the image for 6 hours by default.
 2. **camo's cache:** every external image in a README goes through GitHub's proxy (`camo.githubusercontent.com`), which keeps its own copy.
 
-The quick fix is making camo see a new URL: append a throwaway parameter (`&v=2`, then `&v=3`...). There is also a `curl -X PURGE` against the camo URL to invalidate one specific image, but use it sparingly: it forces every GitHub user to re-download the image.
-
-A privacy bonus: since the one requesting the external service is GitHub's proxy and not the visitor's browser, widgets do not see your readers' IPs.
+The quick fix is making camo see a new URL: append a throwaway parameter (`&v=2`, then `&v=3`...). There is also a `curl -X PURGE` against the camo URL, but use it sparingly: it forces every GitHub user to re-download the image. A privacy bonus: since the one requesting the external service is GitHub's proxy and not the visitor's browser, widgets do not see your readers' IPs.
 
 ## Security: tokens and what you expose
 
@@ -234,33 +197,31 @@ Three non-negotiable rules:
 2. **A token never goes in the README, in the workflow YAML, or in a commit message.** GitHub's secret protection detects the `ghp_` and `github_pat_` patterns on push, but do not rely on that alone.
 3. **If a token leaks, revoke it immediately** under Settings → Developer settings. Deleting the commit revokes nothing.
 
-And the part almost nobody reviews before publishing: what your README says about you to people who are not your audience. A `mailto:` with your email in plain sight guarantees spam (JavaScript or image obfuscation does not work: harvesters defeat it). A public Steam card exposes your library, your playtime, and your friends list. View counters collect telemetry from your profile. None of these is wrong by definition; all of them should be conscious decisions. In my case I keep the Gmail button and the Steam card because they are part of my profile's identity — and I know exactly what I am exposing.
+And the part almost nobody reviews before publishing: a `mailto:` with your email in plain sight guarantees spam (obfuscation does not work: harvesters defeat it), a public Steam card exposes your library, your playtime, and your friends list, and view counters collect telemetry. None of these is wrong by definition; all of them should be conscious decisions. I keep the Gmail button and the Steam card because they are part of my profile's identity — and I know exactly what I am exposing.
 
 ## View counter and sponsor button
 
-Two short badges almost everyone asks for. The most-used view counter is komarev's, and it belongs right above the greeting:
+The most-used view counter is komarev's, and it belongs right above the greeting:
 
 ```markdown
 ![Profile Views](https://komarev.com/ghpvc/?username=Jesus-Valverde&color=blueviolet&style=for-the-badge&label=PROFILE+VIEWS)
 ```
 
-Remember the number is approximate (the cache filters part of the traffic). Avoid `visitor-badge.laobi.icu`, still circulating in card collections: it is the most fragile service in its category.
-
-The sponsor button is a badge linking to your GitHub Sponsors page:
+The number is approximate (the cache filters part of the traffic). Avoid `visitor-badge.laobi.icu`, still circulating in card collections: it is the most fragile service in its category. The sponsor button is a badge linking to your GitHub Sponsors page:
 
 ```markdown
 [![Sponsor Me](https://img.shields.io/badge/Sponsor_Me-blueviolet?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/Jesus-Valverde)
 ```
 
-The overlooked detail: the link only works if you have GitHub Sponsors enabled, which is a separate step at github.com/sponsors (available in Mexico; it asks for a Stripe or PayPal account to receive money). If you would rather skip that signup, Buy Me a Coffee is the no-paperwork alternative, and its badge embeds the same way.
+The overlooked detail: the link only works if you have GitHub Sponsors enabled — a separate step at github.com/sponsors (available in Mexico; it asks for a Stripe or PayPal account to receive money). If you would rather skip that signup, Buy Me a Coffee is the no-paperwork alternative, and its badge embeds the same way.
 
 ## Automatic generators
 
-If you want to skip the manual assembly, there are two form-based generators: rahuldkjain's (at `rahuldkjain.github.io/github-profile-readme-generator`; you fill in name, tagline, socials and skills, and it generates the Markdown with a live preview) and GPRM (`gprm.itsvg.in`; tick boxes per section, 300+ technologies, themes).
+Two form-based generators do the same job: rahuldkjain's (at `rahuldkjain.github.io/github-profile-readme-generator`; you fill in name, tagline, socials and skills, and it generates the Markdown with a live preview) and GPRM (`gprm.itsvg.in`; tick boxes per section, 300+ technologies, themes).
 
 For inspiration, two complementary collections: `awesome-github-profile-readme` (over 31,000 stars; browse rendered real profiles and copy the Markdown of the one you like) and `Awesome-Profile-README-templates` (11,200★; pure templates organized by style — short, elaborate, code-heavy, multimedia). As a healthy ceiling, the guide itself says it: one or two cards, three at most.
 
-The shortcut's cost: generators produce clone profiles. When thousands of people tick the same boxes, profiles start resembling each other. A generator is a good starting point; the value is in what you add afterwards. As for the AI generators that proliferated in 2025-2026: they exist, but nearly all the evidence of their quality comes from the marketing of the people selling them.
+The shortcut's cost: generators produce clone profiles. A generator is a good starting point; the value is in what you add afterwards. As for the AI generators that proliferated in 2025-2026: they exist, but nearly all the evidence of their quality comes from the marketing of the people selling them.
 
 ## Does a decorated README help you get hired?
 
@@ -282,7 +243,7 @@ There is no documented length limit for a README; "keep it short and the importa
 
 ## Starter template
 
-With all of the above, here is a minimal, decent base to start yours. Replace the data, commit it to your special repo, and add pieces one at a time:
+A minimal, decent base to start yours. Replace the data, commit it to your special repo, and add pieces one at a time:
 
 ```markdown
 # Hi! I'm YOUR NAME 👋
@@ -309,7 +270,7 @@ Whatever you want to tell, with a blank line before it so it renders.
 </details>
 ```
 
-Every piece you add afterwards (streak, snake, counter) — you already know what it costs, who it depends on, and how to fix it when it breaks. That knowledge is the difference between a profile that looks good on tutorial day and one that is still alive a year later.
+Every piece you add afterwards — you already know what it costs, who it depends on, and how to fix it when it breaks. That knowledge is the difference between a profile that looks good on tutorial day and one that is still alive a year later.
 
 ---
 
@@ -329,6 +290,6 @@ Every piece you add afterwards (streak, snake, counter) — you already know wha
 - Platane/snk (repo and its own workflow); lowlighter/metrics; gautamkrishnar/blog-post-workflow
 - tandpfun/skill-icons; syvixor/skills-icons; badges/shields (docs); kyechan99/capsule-render; DenverCoder1/readme-typing-svg
 - antonkomarev/github-profile-views-counter; vn7n24fzkq/github-profile-summary-cards; yoshi389111/github-profile-3d-contrib
-- VishwaGauravIn/github-profile-readme-maker; abhisheknaiidu/awesome-github-profile-readme
+- VishwaGauravIn/github-profile-readme-maker; rahuldkjain/github-profile-readme-generator; abhisheknaiidu/awesome-github-profile-readme; kautukkundan/Awesome-Profile-README-templates; jonatasemidio/multilanguage-readme-pattern
 - The Register (Dec 17, 2025) and github.blog changelogs on pricing and runners
 - Underdog.io, a Glassdoor thread (Jul 2025), and discussion #182100 (Dec 2025) — anecdotal counter-premise evidence
