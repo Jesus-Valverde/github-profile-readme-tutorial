@@ -5,6 +5,29 @@
 
 Este tutorial te enseña a armar el README de tu perfil de GitHub: el repo especial que lo activa, los badges, las tarjetas automáticas de estadísticas, la serpiente con GitHub Actions, y los errores que dejan perfiles rotos. Todo está probado en mi propio perfil, que uso como ejemplo a lo largo del tutorial.
 
+## Contenido
+
+1. [Cómo crear tu README y que se muestre en tu perfil](#cómo-crear-tu-readme-y-que-se-muestre-en-tu-perfil)
+2. [Mi perfil como ejemplo](#mi-perfil-como-ejemplo)
+3. [Qué poner en tu README (antes de los widgets)](#qué-poner-en-tu-readme-antes-de-los-widgets)
+4. [Badges con shields.io](#badges-con-shieldsio)
+5. [Íconos sin texto con skill-icons](#íconos-sin-texto-con-skill-icons)
+6. [README en dos idiomas](#readme-en-dos-idiomas)
+7. [El formato nativo de GitHub](#el-formato-nativo-de-github)
+8. [Banners y efectos animados (con moderación)](#banners-y-efectos-animados-con-moderación)
+9. [Tarjetas de estadísticas](#tarjetas-de-estadísticas)
+10. [Otros widgets](#otros-widgets)
+11. [La serpiente con GitHub Actions](#la-serpiente-con-github-actions)
+12. [Por qué tu tarjeta muestra datos viejos](#por-qué-tu-tarjeta-muestra-datos-viejos)
+13. [Seguridad: tokens y lo que expones](#seguridad-tokens-y-lo-que-expones)
+14. [Contador de visitas y botón de sponsor](#contador-de-visitas-y-botón-de-sponsor)
+15. [Generadores automáticos](#generadores-automáticos)
+16. [¿Un README decorado ayuda a conseguir trabajo?](#un-readme-decorado-ayuda-a-conseguir-trabajo)
+17. [Problemas comunes](#problemas-comunes)
+18. [Plantilla para empezar](#plantilla-para-empezar)
+19. [Lo esencial en 5 puntos](#lo-esencial-en-5-puntos)
+20. [Fuentes](#fuentes)
+
 ## Cómo crear tu README y que se muestre en tu perfil
 
 GitHub muestra un README en tu perfil cuando cumples tres cosas:
@@ -19,11 +42,25 @@ Tres casos especiales: las cuentas administradas por una empresa (Enterprise Man
 
 ## Mi perfil como ejemplo
 
-Este tutorial nació de un pendiente real: mi perfil tenía una sección "👉 Tutorials" con un GIF de "loading..." y la admisión de que estaba sin terminar. La llené escribiendo justamente este documento, y su anatomía sirve de caso de estudio.
+El caso de estudio es mi propio README, tal como estaba antes de esta actualización: 3,369 bytes de estructura narrativa — un saludo, la sección Tutorials (entonces un GIF de "loading..." y la nota de que estaba sin terminar), quién soy con la bandera de México, mis estudios, 11 badges de tecnologías, botones a freeCodeCamp, Exercism y HackerRank, enlaces de contacto y una tarjeta de Steam. En total, 17 badges de shields.io con el estilo `for-the-badge`.
 
-Mi `README.md` original pesa 3,369 bytes: saludo, la sección Tutorials (el placeholder), quién soy con la bandera de México, estudios, 11 badges de tecnologías, 3 botones de práctica (freeCodeCamp, Exercism, HackerRank), 3 de contacto (LinkedIn, Linktree, correo) y una tarjeta de Steam. Son 17 badges en total, todos de shields.io con el estilo `for-the-badge`. Hacía bien sin proponérselo: `alt` en todas las imágenes y encabezados `##` correctos, justo lo que pide la guía de accesibilidad de GitHub.
+Dos aciertos que tenía sin proponérmelos: todas las imágenes llevaban texto `alt` y las secciones usaban encabezados `##` de verdad — el mínimo que pide la guía de accesibilidad de GitHub y que muchos perfiles decorados se saltan.
 
-Lo que le faltaba: tarjetas de estadísticas, racha y la serpiente — lo que el resto del tutorial construye. Y dos fragilidades para que no caigas en ellas: la tarjeta de Steam la sirve un servicio comunitario (`card.yuy1n.io`) sin respaldo (si cierra, se rompe el bloque más grande del perfil), y el botón de correo expone mi Gmail a los recolectores de spam. Los candados van más abajo.
+Lo que no tenía es lo que este tutorial construye: tarjetas de estadísticas, racha de contribuciones y la serpiente. Y dos fragilidades que conviene conocer antes de copiar el formato: la tarjeta de Steam la servía un servicio comunitario (`card.yuy1n.io`) sin respaldo alguno — si el servicio cierra, se rompe el bloque más grande del perfil —, y el botón de correo exponía mi Gmail a los recolectores de spam. Los candados van más abajo.
+
+## Qué poner en tu README (antes de los widgets)
+
+Antes de los componentes técnicos, decide el contenido. Tu perfil tiene dos audiencias: los reclutadores que casi nunca abren GitHub, y la minoría técnica que sí lo lee y valora el detalle — escribe para la segunda, que es la que llega de verdad.
+
+Cinco recomendaciones que salen de la práctica y de la evidencia del tema:
+
+- **Una introducción corta**: quién eres, qué haces y qué estás construyendo o aprendiendo ahora. Es lo que se lee de verdad.
+- **Lo importante en la primera pantalla**: en móvil se ve poco; preséntate, enlaza tu mejor trabajo y deja el contacto a la vista antes de cualquier adorno.
+- **Enlaces que mantienes**: un link muerto comunica peor que no tener link.
+- **Tu voz, no una plantilla**: los generadores producen perfiles clon; el texto propio es lo que te distingue.
+- **El texto primero, la decoración después**: los widgets no salvan un README sin contenido.
+
+## Badges con shields.io
 
 ## Badges con shields.io
 
